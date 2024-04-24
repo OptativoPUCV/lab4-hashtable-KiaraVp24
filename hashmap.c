@@ -48,11 +48,12 @@ void insertMap(HashMap * map, char * key, void * value) {
     if(map->buckets[pos] == NULL || map->buckets[pos]->key == NULL) {
         map->buckets[pos] = createPair(key,value);
         map->size++;
+        if(map->size > map->capacity*0.7) enlarge(map);
     } else {
         map->buckets[pos]->value = value;
     }
-    if(map->size >= map->capacity*0.7) enlarge(map);
 }
+
 
 
 void enlarge(HashMap * map) {
